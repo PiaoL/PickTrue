@@ -15,7 +15,7 @@ from picktrue.sites.abstract import DummySite, DummyFetcher
 from picktrue.utils import retry
 
 IMAGE_URL_TPL = "http://img.hb.aicdn.com/{file_key}"
-BASE_URL = "http://huabanpro.com"
+BASE_URL = "https://huaban.com/"
 
 XHR_HEADERS = {
     "X-Requested-With": "XMLHttpRequest",
@@ -337,6 +337,7 @@ class HuaBan(DummySite):
     @property
     def _boards_pins(self):
         for board in self.user.boards:
+            self._boards.append(board)
             for pin in board.pins:
                 yield board, pin
 
@@ -349,7 +350,7 @@ class HuaBan(DummySite):
 
     def save_meta(self, file_name):
         meta = self.as_dict()
-        json.dump(meta, open(file_name, "wb"))
+        json.dump(meta, open(file_name, "w"))
 
 
 class HuaBanBoard(DummySite):
